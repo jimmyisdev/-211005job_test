@@ -1,0 +1,127 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+@mixin flexR {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+@mixin flexC {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+body{
+
+    overflow-x: hidden;
+}
+
+
+
+h1, h2, h3, h4, h5, a, ul, li, span, p{
+    margin: 0;
+    padding: 0;
+}
+h1{
+    font-size: 2rem;
+}
+h2{
+    font-size: 1.8rem;
+}
+h3{
+    font-size: 1.6rem;
+}
+h4{
+    font-size: 1.4rem;
+}
+h5, p, i, a{
+    font-size: 1.2rem;
+}
+
+
+li, button{
+    cursor: pointer;
+    margin: 0;
+}
+
+.trade_item, .market_item{
+    span{
+        margin: .5rem 1rem;
+        padding: 0 .5rem;
+        width: 6rem;
+    }
+}
+
+a:link,
+a:active,
+a:visited,
+a:hover{
+    color: inherit;
+}
+form{
+    @include flexC;
+}
+
+input, button, submit { 
+    border:none; 
+    outline: none;
+} 
+
+img{
+    width: 100%;
+
+}
+input{
+    background-color:yellow;
+    margin: 1rem;
+    height: 2rem;
+    padding: .5rem;
+}
+label{
+    @include flexR;
+    align-items: center;
+}
+
+footer{
+    width: 100vw;
+}
+
+section{
+    @include flexC;
+    padding: 1rem;
+    width: 100vw;
+    height: 80vh;
+}
+
+
+.header{
+    @include flexC;
+    padding: .5rem;
+    ul{
+        @include flexR;
+    }
+    li{
+        margin: .5rem;
+    }
+}
+.notSelected{
+    color: black;
+}
+.selected{
+    border-bottom: 2px solid red;
+}
+
+.box_title, .box_content{
+    @include flexC;
+    width: 100vw;
+    padding: .5rem;
+}
+
+
+
