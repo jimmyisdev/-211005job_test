@@ -7,8 +7,8 @@ function App() {
   return (
     <div className="App">
       <SymbolSelector />
-      {/* <MarketDepth/>
-      <TradeList/> */}
+      <MarketDepth/>
+      <TradeList/>
     </div>
   );
 }

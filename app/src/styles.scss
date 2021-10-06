@@ -18,12 +18,8 @@
 }
 
 body{
-
     overflow-x: hidden;
 }
-
-
-
 h1, h2, h3, h4, h5, a, ul, li, span, p{
     margin: 0;
     padding: 0;
@@ -50,20 +46,8 @@ li, button{
     margin: 0;
 }
 
-.trade_item, .market_item{
-    span{
-        margin: .5rem 1rem;
-        padding: 0 .5rem;
-        width: 6rem;
-    }
-}
 
-a:link,
-a:active,
-a:visited,
-a:hover{
-    color: inherit;
-}
+
 form{
     @include flexC;
 }
@@ -73,10 +57,6 @@ input, button, submit {
     outline: none;
 } 
 
-img{
-    width: 100%;
-
-}
 input{
     background-color:yellow;
     margin: 1rem;
@@ -88,9 +68,6 @@ label{
     align-items: center;
 }
 
-footer{
-    width: 100vw;
-}
 
 section{
     @include flexC;
@@ -99,28 +76,24 @@ section{
 }
 
 
-.header{
-    @include flexC;
-    padding: .5rem;
-    ul{
+.box_content{
+    width: 100%;
+    @include flexR;
+    justify-content: center;
+
+    .sm_box{
         @include flexR;
     }
-    li{
-        margin: .5rem;
+
+    ul{
+        width: 300px;
+    }
+    .item_label, .item_single{
+        @include flexR;
+        justify-content: space-around;
+        span{
+            width: 6rem;
+            text-align: left;
+        }
     }
 }
-.notSelected{
-    color: black;
-}
-.selected{
-    border-bottom: 2px solid red;
-}
-
-.box_title, .box_content{
-    @include flexC;
-    width: 100vw;
-    padding: .5rem;
-}
-
-
-
