@@ -74,6 +74,12 @@ section{
     padding: 1rem;
     width: 100vw;
 }
+.search_area{
+    @include flexC;
+    width: 15rem;
+}
+
+
 
 
 .box_content{

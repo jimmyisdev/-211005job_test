@@ -56,7 +56,7 @@ export default function SymbolSelector() {
           <h1>Symbol Selector</h1>
         </div>
         <div className="box_content">
-          <div ref={wrapperRef}>
+          <div ref={wrapperRef} className="search_area">
             <input
               onClick={() => setDisplay(!display)}
               placeholder="Input Symbol"

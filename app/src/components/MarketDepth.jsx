@@ -14,7 +14,6 @@ export default function MarketDepth() {
     const marketDepthSocket = new WebSocket(
       `${baseEndpoint}${currentSymbolToLowecase}${partialBookDepth}${levels}`
     );
-
       marketDepthSocket.onmessage = (event) => {
         let data = JSON.parse(event.data);
         let askaData = data.asks;
@@ -25,7 +24,6 @@ export default function MarketDepth() {
         setBids(processedBids);
       };
   }
-
   useEffect(() => {
     if (currentSymbol) {
       setAsks([]);
@@ -35,12 +33,12 @@ export default function MarketDepth() {
   }, [currentSymbol]);
 
 
+
   return (
     <section className="data_container">
       <div className="box_title">
         <h1>Market Deoth</h1>
       </div>
-
       <div className="box_content">
         <div className="sm_box">
           <div className="label">
