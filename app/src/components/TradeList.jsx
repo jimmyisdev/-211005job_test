@@ -4,36 +4,37 @@ import { useGlobalContext } from "../context/Context";
 // For trades, the system should subscribe Aggregate Trade Streams.
 
 export default function TradeList() {
-  const { searchSymbol, baseEndpoint } = useGlobalContext();
+  const { currentSymbol, baseEndpoint } = useGlobalContext();
+  let currentSymbolToLowecase = currentSymbol.toLowerCase();
+
   const aggTrade = "@aggTrade";
   const [tradeBox, setTradeBox] = useState([]);
   const [currentTrades, setCurrentTrades] = useState([]);
 
   function connectSocket(){
-    // const tradeSocket = new WebSocket(
-    //   `${baseEndpoint}${searchSymbol}${aggTrade}`
-    // );
     const tradeSocket = new WebSocket(
-      `wss://stream.binance.com:9443/ws/ltcbtc${aggTrade}`
+      `${baseEndpoint}${currentSymbolToLowecase}${aggTrade}`
     );
     tradeSocket.onmessage = (event) => {
-    let data = JSON.parse(event.data);
-    let tradeTime = data.T;
-    let tradePrice = data.p;
-    let tradeQuantity = data.q;
-    let singleTradeInfo = {
-      tradeTime: new Date(tradeTime).toLocaleTimeString(),
-      tradePrice,
-      tradeQuantity,
+      let data = JSON.parse(event.data);
+      let tradeTime = data.T;
+      let tradePrice = data.p;
+      let tradeQuantity = data.q;
+      let singleTradeInfo = {
+        tradeTime: new Date(tradeTime).toLocaleTimeString(),
+        tradePrice,
+        tradeQuantity,
+      };
+      setTradeBox((oldArray) => [...oldArray, singleTradeInfo]);
     };
-    setTradeBox((oldArray) => [...oldArray, singleTradeInfo]);
-  };
   }
   useEffect(() => {
-    setTradeBox([])
-    setCurrentTrades([])
-    connectSocket();
-  }, [searchSymbol]);
+    if (currentSymbol) {
+      setTradeBox([]);
+      setCurrentTrades([]);
+      connectSocket();
+    }
+  }, [currentSymbol]);
 
 
   useEffect(() => {

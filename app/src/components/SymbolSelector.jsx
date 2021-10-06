@@ -5,24 +5,21 @@ import { useGlobalContext } from '../context/Context';
 // But it should have auto complete function when the user types 2 or more characters.
 
 export default function SymbolSelector() {
-  const {
-    setSearchTerm,
-    searchTerm,
-    searchResult,
-    updateSymbol,
-  } = useGlobalContext();
+  const { allSymbols, loading, setCurrentSymbol } = useGlobalContext();
   const [ display, setDisplay ] = useState(false);
+  const [ options, setOptions ] = useState([]);
+  const [ search, setSearch ] = useState("");
   const wrapperRef = useRef(null);
-  const searchValue = useRef("")
-  const handleClickOutside = (event) => {
-    const { current: wrap } = wrapperRef;
-    if (wrap && !wrap.contains(event.target)) {
-      setDisplay(false);
-    }
-  };
-  function searchSymbol (){
-    setSearchTerm(searchValue.current.value);
-  }
+
+  useEffect(() => {
+    let currentSearch = search.toUpperCase();
+    let currentAutoSymbols = [];
+    currentAutoSymbols = allSymbols.filter(
+      ({ symbol }) => symbol.indexOf(currentSearch) > -1
+    );
+    setOptions(currentAutoSymbols)
+  }, [search]);
+
 
   useEffect(() => {
     window.addEventListener("mousedown", handleClickOutside);
@@ -30,6 +27,29 @@ export default function SymbolSelector() {
       window.removeEventListener("mousedown", handleClickOutside);
     };
   });
+
+  const handleClickOutside = (event) => {
+    const { current: wrap } = wrapperRef;
+    if (wrap && !wrap.contains(event.target)) {
+      setDisplay(false);
+    }
+  };
+  const updateSymbol = (symbol) => {
+    setSearch(symbol);
+    setDisplay(false);
+    setCurrentSymbol(search);
+  };
+
+
+
+  if (loading) {
+    return (
+      <section className="box_content">
+        <h1>loading</h1>
+      </section>
+    );
+  }
+
     return (
       <section>
         <div className="box_title">
@@ -38,31 +58,31 @@ export default function SymbolSelector() {
         <div className="box_content">
           <div ref={wrapperRef}>
             <input
-              placeholder="Input Symbol"
               onClick={() => setDisplay(!display)}
-              ref={searchValue}
-              // value={searchTerm}
-              onChange={() => searchSymbol()}
+              placeholder="Input Symbol"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
             />
             {display && (
               <div className="autoContainer">
-                {searchResult &&
-                  searchResult.map((value, i) => {
-                    return (
-                      <div
-                        onClick={() => updateSymbol(value.symbol)}
-                        className="option"
-                        key={i}
-                        tabIndex="0"
-                      >
-                        <span>{value.symbol}</span>
-                      </div>
-                    );
-                  })}
+                {options &&
+                  options.map((value, i) => {
+                      return (
+                        <div
+                          onClick={() => updateSymbol(value.symbol)}
+                          className="option"
+                          key={i}
+                          tabIndex="0"
+                        >
+                          <span>{value.symbol}</span>
+                        </div>
+                      );
+                    })}
               </div>
             )}
           </div>
         </div>
       </section>
     );
-}
+  }
+

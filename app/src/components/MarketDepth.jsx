@@ -3,19 +3,18 @@ import { useGlobalContext } from "../context/Context";
 // For market depth, the system should subscribe Partial Book Depth Streams(both 10 or 20 are fine).
 
 export default function MarketDepth() {
-  const { searchSymbol, baseEndpoint, allSymbols } = useGlobalContext();
+  const { currentSymbol, baseEndpoint } = useGlobalContext();
+  let currentSymbolToLowecase = currentSymbol.toLowerCase();
   const partialBookDepth = "@depth";
   const levels = 20;
   const [ asks, setAsks ] = useState([]);
   const [ bids, setBids ] = useState([]);
 
   function connectSocket() {
-    // const marketDepthSocket = new WebSocket(
-    //   `${baseEndpoint}${searchSymbol.toLoweCase()}${partialBookDepth}${levels}`
-    // );
     const marketDepthSocket = new WebSocket(
-      `wss://stream.binance.com:9443/ws/ltcbtc${partialBookDepth}${levels}`
+      `${baseEndpoint}${currentSymbolToLowecase}${partialBookDepth}${levels}`
     );
+
       marketDepthSocket.onmessage = (event) => {
         let data = JSON.parse(event.data);
         let askaData = data.asks;
@@ -28,10 +27,12 @@ export default function MarketDepth() {
   }
 
   useEffect(() => {
-    setAsks([])
-    setBids([])
-    connectSocket();
-  }, [searchSymbol]);
+    if (currentSymbol) {
+      setAsks([]);
+      setBids([]);
+      connectSocket();
+    }
+  }, [currentSymbol]);
 
 
   return (

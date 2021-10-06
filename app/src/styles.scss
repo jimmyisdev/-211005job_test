@@ -88,9 +88,15 @@ section{
     ul{
         width: 300px;
     }
+    .item_label{
+        font-weight: 700;
+
+    }
     .item_label, .item_single{
         @include flexR;
         justify-content: space-around;
+        border-bottom: 1px solid black;
+
         span{
             width: 6rem;
             text-align: left;
