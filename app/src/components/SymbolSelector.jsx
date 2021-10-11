@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useGlobalContext } from '../context/Context';
+import Loading from "./Loading";
 
 // Symbol selector is a free text field. 
 // But it should have auto complete function when the user types 2 or more characters.
@@ -36,18 +37,14 @@ export default function SymbolSelector() {
   };
   const updateSymbol = (symbol) => {
     setSearch(symbol);
+    setCurrentSymbol(symbol);
     setDisplay(false);
-    setCurrentSymbol(search);
   };
 
 
 
   if (loading) {
-    return (
-      <section className="box_content">
-        <h1>loading</h1>
-      </section>
-    );
+    return <Loading />;
   }
 
     return (

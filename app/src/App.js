@@ -1,14 +1,20 @@
-import MarketDepth from "./components/MarketDepth";
+
+import HeaderSec from "./components/HeaderSec";
+import MarketDepthSec from "./components/MarketDepthSec";
 import SymbolSelector from "./components/SymbolSelector";
-import TradeList from "./components/TradeList";
+import TradeListSec from "./components/TradeListSec";
 import "./styles.scss";
 
+
+
 function App() {
+
   return (
     <div className="App">
+      <HeaderSec />
       <SymbolSelector />
-      <MarketDepth/>
-      <TradeList/>
+      <MarketDepthSec />
+      <TradeListSec/>
     </div>
   );
 }

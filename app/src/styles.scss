@@ -1,10 +1,4 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    list-style: none;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Oswald:wght@700&family=Staatliches&display=swap');
 @mixin flexR {
     display: flex;
     flex-direction: row;
@@ -16,6 +10,24 @@
     justify-content: center;
     align-items: center;
 }
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+$number: 'Inconsolata', monospace;
+$label: 'Oswald', sans-serif;
+$title: 'Staatliches', cursive;
+$red: #FF312E;
+$white: #FFFFFA;
+$dark: #060C0E;
+$blue: #001852;
+
+.App{
+    background-color: #FFFFFA;
+}
 
 body{
     overflow-x: hidden;
@@ -25,10 +37,14 @@ h1, h2, h3, h4, h5, a, ul, li, span, p{
     padding: 0;
 }
 h1{
-    font-size: 2rem;
+    font-size: 2.2rem;
+        font-family: $title;
+
 }
 h2{
     font-size: 1.8rem;
+        font-family: $title;
+
 }
 h3{
     font-size: 1.6rem;
@@ -40,16 +56,13 @@ h5, p, i, a{
     font-size: 1.2rem;
 }
 
-
 li, button{
     cursor: pointer;
     margin: 0;
+    line-height: 2rem;
 }
-
-
-
-form{
-    @include flexC;
+span{
+    text-align: left;
 }
 
 input, button, submit { 
@@ -58,54 +71,62 @@ input, button, submit {
 } 
 
 input{
-    background-color:yellow;
     margin: 1rem;
     height: 2rem;
     padding: .5rem;
+    border-bottom: 2px solid #FF312E;
 }
-label{
-    @include flexR;
-    align-items: center;
+.search_area{
+    @include flexC;
+    width: 16rem;
 }
+
 
 
 section{
     @include flexC;
     padding: 1rem;
     width: 100vw;
+    color: $blue;
 }
-.search_area{
-    @include flexC;
-    width: 15rem;
-}
-
-
-
 
 .box_content{
-    width: 100%;
     @include flexR;
     justify-content: center;
-
     .sm_box{
-        @include flexR;
+        @include flexC;   
+        margin: 1rem;
     }
-
-    ul{
-        width: 300px;
-    }
-    .item_label{
-        font-weight: 700;
-
+    .box_title, .item_label{
+        font-family: $label;
     }
     .item_label, .item_single{
         @include flexR;
         justify-content: space-around;
-        border-bottom: 1px solid black;
+        width: 18rem;
+    }
 
+    .item_single{
+        font-family: $number;
         span{
-            width: 6rem;
-            text-align: left;
+
+            border-bottom: 2px solid $dark;
         }
+
+    }
+
+
+
+    .num_font{
+        width: 4.5rem;
     }
 }
+
+
+
+
+
+
+
+
+
