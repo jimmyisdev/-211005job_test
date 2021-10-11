@@ -103,10 +103,7 @@ const AppProvider = ({ children }) =>{
             };
             if( tradeBox && asks ){
                 setDataLoading(false);
-
             }
-
-
         } catch (error) {
             console.log(error);
             setDataLoading(false);
@@ -129,12 +126,6 @@ const AppProvider = ({ children }) =>{
             fetchStreamData();
         }
     }, [currentSymbol]);
-
-
-
-
-
-
 
     return (
       <AppContext.Provider
